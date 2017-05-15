@@ -33,6 +33,11 @@ header {
   padding: 10px 15px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
+.todo__remove--js {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
 .todo__submit--js {
   background: #FF5252;
   color: white;
@@ -41,16 +46,48 @@ header {
 .todo__canvas--js {
   margin-top: 25px;
 }
+.todo__edit--js {
+  transition: all .5s;
+}
 .todo__item--js {
+  width: 80%;
+  box-sizing: border-box;
+  position: relative;
+
+  margin: auto;
   margin-top: 15px;
   margin-bottom: 15px;
   background: white;
   border-radius: 2px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   padding: 15px;
+
+}
+input.todo__edit-generic {
+  width: 0;
+ transition: all .3s;
 }
 #app {
   max-width: 1200px;
   width: 100%;
   margin: auto;
+}
+.todo__canvas-completed--js {
+  width: 55%;
+  margin: auto;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+.completed {
+  color: #FF5252;
+  font-size: 42px;
+  text-align: center;
+  font-family: 'Just Another Hand', sans-serif;
+  border-bottom: solid 2px #bdbdbd;
+
+}
+.completed__item {
+  text-decoration: line-through;
+  font-style:italic;
 }

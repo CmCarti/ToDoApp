@@ -1,11 +1,13 @@
 
   // Initialize the app
   const toDoList = [];
+  const completedTodos = [];
   const todoForm = document.querySelector('.todo__form--js');
   const todoInput = document.querySelector('.todo__input--js');
   todoForm.addEventListener('submit', (e) => {
     e.preventDefault();
     addTodo(todoInput.value);
+    todoInput.value = "";
   });
 
 
@@ -31,7 +33,9 @@ function editTodo(todo, barClass){
 
 function showHideElement(elementClass){
     const elem = document.querySelector(`.${elementClass}`);
-    elem.style.display = elem.style.display == 'block' ? 'none' : 'block';
+    elem.style.opacity = elem.style.opacity == '1' ? '0' : '1';
+    elem.style.width = elem.style.width == '60%' ? '0' : '60%';
+
 }
 
 function renderTodos(toDoList) {
@@ -39,18 +43,36 @@ function renderTodos(toDoList) {
    const canvas = document.querySelector('.todo__canvas--js');
    canvas.innerHTML = '';
    toDoList.forEach((item, index) => {
-     canvas.innerHTML += `<div class="todo__item--js">
+     canvas.innerHTML += `<div class="todo__item--js" data-index="${index}">
      <h3 class="todo__name">${item}</h3>
      <i class="todo__remove--js fa fa-times" onclick="removeTodo(${index})"></i>
-     <i class="todo__complete--js fa fa-check"></i>
-     <i class="todo__edit--js fa fa-pencil" onClick="showHideElement('todo__edit-${index}')"></i>
-     <form onsubmit="editTodo(${index},'todo__edit-${index}')">
-       <input class="todo__edit-${index}" style="display:block;">
+     <i class="todo__complete--js fa fa-check" onclick="completeTodo(${index})"></i>
+     <form onsubmit="editTodo(${index},'todo__edit-${index}')" style="display:inline;width:60%">
+       <input class="todo__edit-${index} todo__edit-generic" style="opacity:0;">
      </form>
+     <i class="todo__edit--js fa fa-pencil" onClick="showHideElement('todo__edit-${index}')"></i>
+
    </div>`;
+
    });
 }
+function completeTodo(todo) {
+  completedTodos.push(toDoList.slice(todo,todo + 1)[0]);
+  removeTodo(todo);
+  renderCompletedTodos(completedTodos);
+  //renderCompletedTodos(completedTodos);
+}
+function renderCompletedTodos(toDoList) {
+  const canvas = document.querySelector('.todo__canvas-completed--js');
+  canvas.style.padding = '15px';
+  canvas.innerHTML = '<h2 class="completed">Completed ToDos</h2>';
+  toDoList.forEach((item, index) => {
+    canvas.innerHTML += `<div class="completed-todo__item--js" data-index="${index}">
+    <h3 class="todo__name">${index+1}. <span class="completed__item">${item}</span></h3>
+  </div>`;
 
+  });
+}
 function newTodo(todo) {
   // 1. Create ToDo Object and add its properties.
 }
