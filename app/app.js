@@ -1,7 +1,6 @@
-
   // Initialize the app
-  const toDoList = [];
-  const completedTodos = [];
+  let toDoList;
+  let completedTodos;
   const todoForm = document.querySelector('.todo__form--js');
   const todoInput = document.querySelector('.todo__input--js');
   todoForm.addEventListener('submit', (e) => {
@@ -10,10 +9,24 @@
     todoInput.value = "";
   });
 
+  if (localStorage.getItem("toDoList") === null) {
+    toDoList = [];
+    completedTodos = [];
+  } else {
+    /*toDoList = [];
+    completedTodos = [];*/
+    toDoList = JSON.parse(localStorage.getItem("toDoList"));
+    completedTodos = JSON.parse(localStorage.getItem("completedTodos"));
+    renderTodos(toDoList);
+    renderCompletedTodos(completedTodos);
+  }
+
+
 
 function addTodo(todoObject) {
   // 1. push todo
   toDoList.push(todoObject);
+  localStorage.setItem("toDoList", JSON.stringify(toDoList));
   // 2. render todos
   renderTodos(toDoList);
 }
@@ -21,6 +34,7 @@ function addTodo(todoObject) {
 function removeTodo(todo) {
   // 1. slice todo
   toDoList.splice(todo,1);
+  localStorage.setItem("toDoList", JSON.stringify(toDoList));
   renderTodos(toDoList);
   // 2. render todos
 }
@@ -28,6 +42,7 @@ function removeTodo(todo) {
 function editTodo(todo, barClass){
   const editBar = document.querySelector(`.${barClass}`);
   toDoList[todo] = editBar.value;
+  localStorage.setItem("toDoList", JSON.stringify(toDoList));
   renderTodos(toDoList);
 }
 
@@ -59,6 +74,8 @@ function renderTodos(toDoList) {
 function completeTodo(todo) {
   completedTodos.push(toDoList.slice(todo,todo + 1)[0]);
   removeTodo(todo);
+  localStorage.setItem("toDoList", JSON.stringify(toDoList));
+  localStorage.setItem("completedTodos", JSON.stringify(completedTodos));
   renderCompletedTodos(completedTodos);
   //renderCompletedTodos(completedTodos);
 }
