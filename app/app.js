@@ -15,17 +15,25 @@ function addTodo(todoObject) {
   // 2. render todos
   renderTodos(toDoList);
 }
+
 function removeTodo(todo) {
   // 1. slice todo
   toDoList.splice(todo,1);
   renderTodos(toDoList);
   // 2. render todos
 }
+
 function editTodo(todo, barClass){
-  const editBar = document.querySelector(`#${barClass}`);
+  const editBar = document.querySelector(`.${barClass}`);
   toDoList[todo] = editBar.value;
   renderTodos(toDoList);
 }
+
+function showHideElement(elementClass){
+    const elem = document.querySelector(`.${elementClass}`);
+    elem.style.display = elem.style.display == 'block' ? 'none' : 'block';
+}
+
 function renderTodos(toDoList) {
    // 1. render the todos to the screen
    const canvas = document.querySelector('.todo__canvas--js');
@@ -35,13 +43,12 @@ function renderTodos(toDoList) {
      <h3 class="todo__name">${item}</h3>
      <i class="todo__remove--js fa fa-times" onclick="removeTodo(${index})"></i>
      <i class="todo__complete--js fa fa-check"></i>
-     <i class="todo__edit--js fa fa-pencil"></i>
+     <i class="todo__edit--js fa fa-pencil" onClick="showHideElement('todo__edit-${index}')"></i>
      <form onsubmit="editTodo(${index},'todo__edit-${index}')">
-       <input id="todo__edit-${index}">
+       <input class="todo__edit-${index}" style="display:block;">
      </form>
    </div>`;
    });
-   // 2. Give the todos event listeners
 }
 
 function newTodo(todo) {

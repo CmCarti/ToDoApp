@@ -1,0 +1,56 @@
+body {
+  position: relative;
+  background: #03A9F4;
+  font-family: 'Raleway', sans-serif;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+}
+header {
+  color: white;
+  text-align: center;
+}
+.header__heading {
+  font-family: 'Just Another Hand', sans-serif;
+  font-size: 60px;
+  font-weight: normal;
+}
+.header__subheading {
+  font-size: 24px;
+}
+.todo__form--js {
+  width: 80%;
+  margin: auto;
+}
+.todo__form--js input {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  font-size: 22px;
+  margin-bottom: 15px;
+  border-radius: 2px;
+  border: none;
+  padding: 10px 15px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+.todo__submit--js {
+  background: #FF5252;
+  color: white;
+
+}
+.todo__canvas--js {
+  margin-top: 25px;
+}
+.todo__item--js {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  background: white;
+  border-radius: 2px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  padding: 15px;
+}
+#app {
+  max-width: 1200px;
+  width: 100%;
+  margin: auto;
+}
